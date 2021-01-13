@@ -1,0 +1,16 @@
+{
+  "name": "cypress-circleci-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^6.2.1",
+    "cypress-axe": "^0.12.0"
+  }
+}
