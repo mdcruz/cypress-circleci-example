@@ -1,7 +1,11 @@
 version: 2.1
 
+working_directory: &working_directory
+  working_directory: ~/project
+
 jobs:
   install_dependencies:
+    <<: *working_directory
     docker:
       - image: circleci/node:12
     steps:
@@ -16,14 +20,21 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - .cache
 
   run_cypress_tests:
+    <<: *working_directory
     docker:
-      - image: cypress/base:12.18.2
+      - image: cypress/browsers:node12.18.3-chrome87-ff82
     steps:
       - checkout
       - restore_cache:
           key: npm-cache-{{ checksum "package.json" }}
+      - attach_workspace:
+          at: ~/project
       - run:
           name: Running cypress tests
           command: npm test
