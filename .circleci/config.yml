@@ -24,8 +24,6 @@ jobs:
       - checkout
       - restore_cache:
           key: npm-cache-{{ checksum "package.json" }}
-      - attach_workspace:
-          at: ~/project
       - run:
           name: Running cypress tests
           command: npm test
